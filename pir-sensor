@@ -1,0 +1,22 @@
+import RPi.GPIO as GPIO
+import time
+
+PIR = 23
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(PIR, GPIO.IN)
+
+try:
+  time.sleep(2)
+  
+  while True:
+      if GPIO.input(PIR) == 1:
+          GPIO.output(GPIO.HIGH)
+          print("Motion detected")
+      else:
+          print("No motion detected")
+          GPIO.output(GPIO.LOW)
+          
+except KeyboardInterrupt:
+    GPIO.cleanup()
